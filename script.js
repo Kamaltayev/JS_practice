@@ -23,22 +23,63 @@
 
 "use strict";
 
-const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+// let i = 2;
+// while (i <= 16) {
+//   if (i % 2 === 0) {
+//     i++;
+//     continue;
+//   } else {
+//     console.log(i);
+//   }
+//   i++;
+// }
 
-const personalMovieDB = {
-  count: numberOfFilms,
-  movies: {},
-  actors: {},
-  genres: [],
-  privat: false,
-};
+// for (let i = 2; i <= 16; i++) {
+//   if (i % 2 === 0) {
+//     continue;
+//   } else {
+//     console.log(i);
+//   }
+// }
 
-const a = prompt("Один из последних просмотренных фильмов?", ""),
-  b = prompt("На сколько оцените его?", ""),
-  c = prompt("Один из последних просмотренных фильмов?", ""),
-  d = prompt("На сколько оцените его?", "");
+// function fifthTask() {
+//   const arrayOfNumbers = [];
 
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
+//   for (let i = 5; i < 11; i++) {
+//     arrayOfNumbers[i - 5] = i;
+//   }
 
-console.log(personalMovieDB);
+//   console.log(arrayOfNumbers);
+//   return arrayOfNumbers;
+// }
+
+// function firstTask() {
+//   // Значения массива менять нельзя, тут он проверяется автоматически именно на эти значения
+//   const arr = [3, 5, 8, 16, 20, 23, 50];
+//   const result = [];
+
+//   // Пишем решение вот тут
+//   for (let i = 0; i < arr.length; i++) {
+//     result[i] = arr[i];
+//   }
+
+//   // Не трогаем
+//   return result;
+// }
+
+function secondTask() {
+  // Значения массива менять нельзя, тут он проверяется автоматически именно на эти значения
+  const data = [5, 10, "Shopping", 20, "Homework"];
+
+  // Пишем решение вот тут
+  for (let i = 0; i < data.length; i++) {
+    if (typeof data[i] === "number") {
+      data[i] = data[i] * 2;
+    } else if (typeof data[i] === "string") {
+      data[i] = data[i] + "done";
+    }
+  }
+  console.log(data[0]);
+  // Не трогаем
+  return data;
+}
