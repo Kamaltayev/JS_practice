@@ -74,28 +74,27 @@ const personalMovieDB = {
   },
   writeYourGenres: function () {
     for (let i = 1; i <= 3; i++) {
-      
+      //   if (genre == "" || genre == null) {
+      //     console.log("Вы ввели некоректные данные");
+      //     i--;
+      //   } else {
+      //     personalMovieDB.genres[i - 1] = genre;
+      //   }
+      let genres = prompt(
+        "Введите ваши любисые фильмы через запятую"
+      ).toLowerCase();
 
-    //   if (genre == "" || genre == null) {
-    //     console.log("Вы ввели некоректные данные");
-    //     i--;
-    //   } else {
-    //     personalMovieDB.genres[i - 1] = genre;
-    //   }
-    let genres = prompt('Введите ваши любисые фильмы через запятую').toLowerCase()
-
-    if (genres === '' || genres == null) {
-        console.log('Похоже, вы ввели некоректные данные')
-        i--
-    } else {
-        personalMovieDB.genres = genres.split(', ')
-        personalMovieDB.genres.sort()
+      if (genres === "" || genres == null) {
+        console.log("Похоже, вы ввели некоректные данные");
+        i--;
+      } else {
+        personalMovieDB.genres = genres.split(", ");
+        personalMovieDB.genres.sort();
+      }
     }
-    }
-    personalMovieDB.genres.forEach(item, i) => {
-        console.log(`любимый жанр ${i + 1} - это ${item} `)
-    }
-
+    personalMovieDB.genres.forEach((item, i) => {
+      console.log(`любимый жанр ${i + 1} - это ${item} `);
+    });
   },
 };
 
