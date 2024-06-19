@@ -1,155 +1,145 @@
 /* Задание на урок:
 
-1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
-'Сколько фильмов вы уже посмотрели?'
+1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
+перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
+Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
 
-2) Создать объект personalMovieDB и в него поместить такие свойства:
-    - count - сюда передается ответ на первый вопрос
-    - movies - в это свойство поместить пустой объект
-    - actors - тоже поместить пустой объект
-    - genres - сюда поместить пустой массив
-    - privat - в это свойство поместить boolean(логическое) значение false
+2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
+переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
 
-3) Задайте пользователю по два раза вопросы:
-    - 'Один из последних просмотренных фильмов?'
-    - 'На сколько оцените его?'
-Ответы стоит поместить в отдельные переменные
-Записать ответы в объект movies в формате: 
-    movies: {
-        'logan': '8.1'
-    }
+3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
+Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
+при помощи метода forEach вывести в консоль сообщения в таком виде:
+"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
-    
-Проверить, чтобы все работало без ошибок в консоли */
-
-// const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?");
-
-// const personalMovieDB = {
-//   count: numberOfFilms,
-//   movies: {},
-//   actors: {},
-//   genres: [],
-//   privet: false,
-// };
-
-// const a = prompt("Один из последних просмотренных фильмов?", ""),
-//   b = prompt("На сколько оцените его?", ""),
-//   c = prompt("Один из последних просмотренных фильмов?", ""),
-//   d = prompt("На сколько оцените его?", "");
-
-// personalMovieDB.movies[a] = b;
-// personalMovieDB.movies[c] = d;
-
-// console.log(personalMovieDB);
-
-// let i = 2;
-// while (i <= 16) {
-//   if (i % 2 === 0) {
-//     i++;
-//     continue;
-//   } else {
-//     console.log(i);
-//   }
-//   i++;
-// }
-
-// for (let i = 2; i <= 16; i++) {
-//   if (i % 2 === 0) {
-//     continue;
-//   } else {
-//     console.log(i);
-//   }
-// }
-
-// function fifthTask() {
-//   const arrayOfNumbers = [];
-
-//   for (let i = 5; i < 11; i++) {
-//     arrayOfNumbers[i - 5] = i;
-//   }
-
-//   console.log(arrayOfNumbers);
-//   return arrayOfNumbers;
-// }
-
-// function firstTask() {
-//   // Значения массива менять нельзя, тут он проверяется автоматически именно на эти значения
-//   const arr = [3, 5, 8, 16, 20, 23, 50];
-//   const result = [];
-
-//   // Пишем решение вот тут
-//   for (let i = 0; i < arr.length; i++) {
-//     result[i] = arr[i];
-//   }
-
-("use strict");
-
-let numberOfFilms;
-
-function start() {
-  while (numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms)) {
-    numberOfFilms = +prompt("Сколько раз вы полировали шляпу");
-  }
-}
-start();
+"use strict";
 
 const personalMovieDB = {
-  count: numberOfFilms,
+  count: 0,
   movies: {},
   actors: {},
   genres: [],
   privat: true,
+
+  start: function () {
+    while (
+      personalMovieDB.count == "" ||
+      personalMovieDB.count == null ||
+      isNaN(personalMovieDB.count)
+    ) {
+      personalMovieDB.count = +prompt("Сколько раз вы полировали шляпу");
+    }
+  },
+
+  rememberMyFilms: function () {
+    let i = 0;
+    while (i < 2) {
+      const a = prompt("Один из последних просмотренных фильмов?", "").trim(),
+        b = prompt("На сколько оцените его?", "");
+      i++;
+
+      if (a != null && b != null && a != "" && b != "" && a.length < 50) {
+        personalMovieDB.movies[a] = b;
+        console.log("everything is ok!");
+      } else {
+        console.log("error");
+        i--;
+      }
+    }
+  },
+
+  detectedFilmLevel: function () {
+    if (personalMovieDB.count < 10) {
+      alert("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+      alert("Вы классический трипл К");
+    } else if (personalMovieDB.count > 30) {
+      alert("Вы киноман");
+    } else {
+      alert("Произошла ошибка");
+    }
+  },
+
+  toggleVisibleMyDB: function () {
+    if (personalMovieDB.privat === false) {
+      personalMovieDB.privat = true;
+    } else if (personalMovieDB.privat === true) {
+      personalMovieDB.privat = false;
+    }
+  },
+  showMyDB: function () {
+    if (!personalMovieDB.privat) {
+      console.log(personalMovieDB);
+    }
+  },
+  writeYourGenres: function () {
+    for (let i = 1; i <= 3; i++) {
+      
+
+    //   if (genre == "" || genre == null) {
+    //     console.log("Вы ввели некоректные данные");
+    //     i--;
+    //   } else {
+    //     personalMovieDB.genres[i - 1] = genre;
+    //   }
+    let genres = prompt('Введите ваши любисые фильмы через запятую').toLowerCase()
+
+    if (genres === '' || genres == null) {
+        console.log('Похоже, вы ввели некоректные данные')
+        i--
+    } else {
+        personalMovieDB.genres = genres.split(', ')
+        personalMovieDB.genres.sort()
+    }
+    }
+    personalMovieDB.genres.forEach(item, i) => {
+        console.log(`любимый жанр ${i + 1} - это ${item} `)
+    }
+
+  },
 };
 
-function showMyDB() {
-  if (!personalMovieDB.privat) {
-    console.log(personalMovieDB);
-  }
-}
+// console.log(personalMovieDB);
 
-showMyDB(personalMovieDB.privat);
+// function getCoupeNumber(num) {
+//   if (typeof num !== "number" || num < 0 || !Number.isInteger(num)) {
+//     return "Ошибка. Проверьте правильность введенного номера места";
+//   } else if (num == 0 || num > 36) {
+//     return "Таких мест в вагоне не существует";
+//   }
 
-function writeYourGenres() {
-  for (let i = 1; i <= 3; i++) {
-    personalMovieDB.genres[i - 1] = prompt(
-      `Ваш любимый жанр под номером ${i}`,
-      ""
-    );
-  }
-}
+//   return Math.ceil(num / 4);
+// }
 
-writeYourGenres();
+// console.log(getCoupeNumber(5));
 
-function rememberMyFilms() {
-  let i = 0;
-  while (i < 2) {
-    const a = prompt("Один из последних просмотренных фильмов?", ""),
-      b = prompt("На сколько оцените его?", "");
-    i++;
+// function calculateVolumeAndArea(length) {
+//   if (typeof length !== "number" || length < 0 || !Number.isInteger(length)) {
+//     return "При вычислении произошла ошибка";
+//   }
 
-    if (a != null && b != null && a != "" && b != "" && a.length < 50) {
-      personalMovieDB.movies[a] = b;
-      console.log("everything is ok!");
-    } else {
-      console.log("error");
-      i--;
-    }
-  }
-}
+//   let volume = 0;
+//   let surfaceArea = 0;
 
-function detectedFilmLevel() {
-  if (personalMovieDB.count < 10) {
-    alert("Просмотрено довольно мало фильмов");
-  } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-    alert("Вы классический трипл К");
-  } else if (personalMovieDB.count > 30) {
-    alert("Вы киноман");
-  } else {
-    alert("Произошла ошибка");
-  }
-}
+//   volume = length * length * length;
+//   surfaceArea = 6 * length * length;
 
-detectedFilmLevel();
-rememberMyFilms();
+//   return `Объем куба: ${volume}, площадь всей поверхности: ${surfaceArea}`;
+// }
 
-console.log(personalMovieDB);
+// function getTimeFromMinutes(time) {
+//   if (typeof time != "number" || time < 0 || !Number.isInteger(time)) {
+//     return "Ошибка, проверьте данные";
+//   }
+//   let hours = Math.floor(time / 60);
+//   const minute = time % 60;
+//   if (hours == 0 || hours >= 5) {
+//     return `Это ${hours} часов и ${minute} минут`;
+//   } else if (hours == 1) {
+//     return `Это ${hours} час и ${minute} минут`;
+//   } else {
+//     return `Это ${hours} часа и ${minute} минут`;
+//   }
+// }
+
+// console.log(getTimeFromMinutes(70));
