@@ -1,16 +1,19 @@
 /* Задание на урок:
 
-1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
-перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
-Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
 
-2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
-переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
 
-3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
-Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
-при помощи метода forEach вывести в консоль сообщения в таком виде:
-"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
 
 "use strict";
 
@@ -27,7 +30,7 @@ const personalMovieDB = {
       personalMovieDB.count == null ||
       isNaN(personalMovieDB.count)
     ) {
-      personalMovieDB.count = +prompt("Сколько раз вы полировали шляпу");
+      personalMovieDB.count = +prompt("Сколько фильмов вы посмотрели?");
     }
   },
 
@@ -96,9 +99,11 @@ const personalMovieDB = {
       console.log(`любимый жанр ${i + 1} - это ${item} `);
     });
   },
+
+  addNewFilm: function () {},
 };
 
-// console.log(personalMovieDB);
+console.log(personalMovieDB);
 
 // function getCoupeNumber(num) {
 //   if (typeof num !== "number" || num < 0 || !Number.isInteger(num)) {
@@ -142,3 +147,102 @@ const personalMovieDB = {
 // }
 
 // console.log(getTimeFromMinutes(70));
+
+// const students = [
+//   "Peter",
+//   "Andrew",
+//   "Ann",
+//   "Mark",
+//   "Josh",
+//   "Sandra",
+//   "Cris",
+//   "Bernard",
+//   "Takesi",
+//   "Samandar",
+//   "Sam",
+// ];
+
+// function sortStudentsByGroups(arr) {
+//   arr.sort();
+
+//   const firstTeam = arr.slice(0, 3);
+//   const secondTeam = arr.slice(3, 6);
+//   const thirdTeam = arr.slice(6, 9);
+//   const remainStudents = arr.slice(9);
+
+//   const remainingStudentsStr = `Оставшиеся студенты: ${
+//     remainStudents.lenght > 0 ? remainStudents.join(", ") : "-"
+//   }`;
+
+//   return [firstTeam, secondTeam, thirdTeam, remainingStudentsStr];
+// }
+
+// console.log(sortStudentsByGroups(students));
+
+// function pow(a, b) {
+//   let result = 1;
+//   for (let i = 0; i < b; i++) {
+//     result *= a;
+//   }
+
+//   return result;
+// }
+
+// function pow(a, b) {
+//   debugger;
+//   if (b === 1) {
+//     return a;
+//   } else {
+//     return a * pow(a, b - 1);
+//     debugger;
+//   }
+// }
+
+// console.log(pow(2, 2));
+
+// let students = {
+//   js: [
+//     {
+//       name: "John",
+//       progress: 100,
+//     },
+//     {
+//       name: "Ivan",
+//       progress: 60,
+//     },
+//   ],
+
+//   html: {
+//     basic: [
+//       {
+//         name: "Peter",
+//         progress: 20,
+//       },
+//       {
+//         name: "Ann",
+//         progress: 18,
+//       },
+//     ],
+
+//     pro: [
+//       {
+//         name: "Sam",
+//         progress: 10,
+//       },
+//     ],
+//   },
+// };
+
+// console.log(Object.values(students));
+
+function factorial(num) {
+  if (typeof num !== "number" || isNaN(num) || !Number.isInteger(num)) {
+    return "Error!";
+  } else if (num <= 0) {
+    return 1;
+  } else {
+    return num * factorial(num - 1);
+  }
+}
+
+// console.log(factorial(-5));
